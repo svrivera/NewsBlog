@@ -1,0 +1,37 @@
+
+<% if user_signed_in? %>
+  <h1>Welcome <%= current_user.name %></h1>
+<% else %>
+  <h1></h1>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Downtitle</th>
+      <th>Body</th>
+      <th>Date</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @miniposts.each do |minipost| %>
+      <tr>
+        <td><%= minipost.title %></td>
+        <td><%= minipost.downtitle %></td>
+        <td><%= truncate(minipost.body, :length => 503) %></td>
+        <td><%= minipost.created_at.strftime("%F %T") %></td>
+        <td><%= link_to 'Show', minipost %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'More Posts', 'posts' %>
+<% if can? :create, Post %>
+<%= link_to 'New Post', new_post_path %>
+<% end %>

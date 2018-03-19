@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Downtitle:</strong>
+  <%= @post.downtitle %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @post.body %>
+</p>
+
+<br>
+<h2> <%= @post.comments.count %> Comments </h2>
+    <%= render @post.comments %>
+    <% if user_signed_in? %>
+    <h3> Add Comment: </h3>
+    <%= render 'comments/form' %>
+    <% else %>
+    <%= link_to 'New comment', new_user_session_path %>
+    <% end %>
+    <br>
+
+
+
+<% if can? :update, @post %>
+<%= link_to 'Edit', edit_post_path(@post) %>|
+<% end %>
+
+<% if can? :destroy, @post %>
+<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= link_to 'Back', home_index_path %>
