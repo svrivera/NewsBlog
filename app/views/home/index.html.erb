@@ -1,33 +1,31 @@
-
 <% if user_signed_in? %>
-  <h1>Welcome <%= current_user.name %></h1>
+  <h1 >Welcome <%= current_user.name.capitalize %></h1>
+  <div style= "margin-bottom:40px"> </div>
 <% else %>
   <h1></h1>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Downtitle</th>
-      <th>Body</th>
-      <th>Date</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+    <% count = 0%>
+    <div class="row">
     <% @miniposts.each do |minipost| %>
-      <tr>
-        <td><%= minipost.title %></td>
-        <td><%= minipost.downtitle %></td>
-        <td><%= truncate(minipost.body, :length => 503) %></td>
-        <td><%= minipost.created_at.strftime("%F %T") %></td>
-        <td><%= link_to 'Show', minipost %></td>
-      </tr>
+
+        <div class="col-4" style= "margin-bottom:40px">
+        <h1><%= minipost.title %></h1>
+        <h3><%= minipost.downtitle %></h1>
+        <p><%= truncate(minipost.body, :length => 503) %> </p>
+        <%= minipost.created_at.strftime("%F %T") %>
+        <%= link_to 'Show', minipost %>
+      </div>
+      <% count=1 %>
+      <% if count ==2 %>
+        <% count =0%>
+        </div>
+        <div class="row">
+          <% end %>
+
     <% end %>
-  </tbody>
-</table>
+
+    </div>
 
 <br>
 

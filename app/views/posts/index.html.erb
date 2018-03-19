@@ -1,34 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1 >Todas las Noticias:</h1>
+<div style= "margin-bottom:40px"> </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Downtitle</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.downtitle %></td>
-        <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
+<% count = 0%>
+<div class="row">
+<% @posts.each do |post| %>
 
-        <% if can? :create, Post %>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-
-      </tr>
+    <div class="col-4" style= "margin-bottom:40px">
+    <h1><%= post.title %></h1>
+    <h3><%= post.downtitle %></h1>
+    <p><%= post.body %> </p>
+    <%= link_to 'Show', post %>
+    <% if can? :create, Post %>
+      <td><%= link_to 'Edit', edit_post_path(post) %></td>
+      <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  <% count=1 %>
+  <% if count ==2 %>
+    <% count =0%>
+    </div>
+    <div class="row">
+      <% end %>
+
+<% end %>
+
+</div>
+
+<br>
 
 <br>
 <% if can? :create, Post %>
